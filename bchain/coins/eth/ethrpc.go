@@ -33,6 +33,8 @@ const (
 	TestNetGoerli EthereumNet = 5
 	// Binance Smart Chain network
 	BscNet EthereumNet = 56
+	// Bor Chain
+	BorNet EthereumNet = 137
 )
 
 // Configuration represents json config file
@@ -160,6 +162,10 @@ func (b *EthereumRPC) Initialize() error {
 		b.Testnet = false
 		b.Network = "livenet"
 		break
+    case BorNet:
+    	b.Testnet = false
+    	b.Network = "livenet"
+    	break
     case BscNet:
     	b.Testnet = false
     	b.Network = "livenet"
@@ -357,7 +363,7 @@ func (b *EthereumRPC) GetChainInfo() (*bchain.ChainInfo, error) {
 		Version:       ver,
 	}
 	idi := int(id.Uint64())
-	if idi == 1 || idi == 56 {
+	if idi == 1 || idi == 56 || idi == 137 {
 		rv.Chain = "mainnet"
 	} else {
 		rv.Chain = "testnet " + strconv.Itoa(idi)
